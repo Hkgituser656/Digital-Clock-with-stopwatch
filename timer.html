@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer Clock</title>
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 30px 50px;
+            text-align: center;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .display {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        button#start {
+            background-color: #28a745;
+            color: white;
+        }
+
+        button#stop {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        button#reset {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        button:active {
+            transform: scale(1);
+        }
+
+        button#start:hover {
+            background-color: #218838;
+        }
+
+        button#stop:hover {
+            background-color: #c82333;
+        }
+
+        button#reset:hover {
+            background-color: #e0a800;
+        }
+
+        button#clear {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        button#clear:hover {
+            background-color: #5a6268;
+        }
+
+        button#clear:active {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Digital Clock</h1>
+        <h1 id="time"></h1>
+        <div class="container">
+            <p class="display">0</p>
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+            <button id="reset">Reset</button>
+            <button id="clear">Clear</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.querySelector('.display');
+        let start = document.getElementById('start');
+        let stop = document.getElementById('stop');
+        let reset = document.getElementById('reset');
+        let time = document.getElementById('time');
+        let id;
+        let seconds = 0;
+        setInterval(() => {
+            time.innerHTML = new Date().toLocaleTimeString();
+        }, 1000);
+        
+        function startTimer() {
+        
+                id = setInterval(() => {
+                    seconds++;
+                    display.innerHTML = seconds;
+                }, 1000);
+            
+        }
+
+        function stopTimer() {
+            clearInterval(id);
+        }
+
+        function resetTimer() {
+            clearInterval(id);
+            id = null;
+            seconds = 0;
+            display.innerHTML = seconds;
+        }
+
+        start.addEventListener('click', startTimer);
+        stop.addEventListener('click', stopTimer);
+        reset.addEventListener('click', resetTimer);
+    </script>
+</body>
+</html>
